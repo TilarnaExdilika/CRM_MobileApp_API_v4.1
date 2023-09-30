@@ -111,7 +111,7 @@ class FirstScreen extends StatelessWidget {
                 InfoCard(
                     title: 'localization_title',
                     content: 'localization_content',
-                    icon: Ionicons.text_outline,
+                    icon: Ionicons.people_outline,
                     isPrimaryColor: true),
                 InfoCard(
                     title: 'linting_title',

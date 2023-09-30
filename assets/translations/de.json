@@ -2,7 +2,7 @@
   "app_name": "SuiteCRM API v4.1",
 
   "bottom_nav_first": "Trang chủ",
-  "bottom_nav_second": "Admin",
+  "bottom_nav_second": "Quản lý",
 
   "localization_title": "Bán hàng",
   "localization_content": "Bản dịch đơn giản với gói Easy Translations.",
@@ -73,11 +73,15 @@
   "custom_email": "Tùy chỉnh email",
   "inbox": "Hộp thư đến",
   "email_sent": "Email đã gửi",
-  "email_campaigns": "Hoạt động email",
+  "email_campaigns": "Chiến dịch email",
   "email_queue": "Hàng đợi queue",
 
-  "development_tools": "Development tools",
+  "development_tools": "Công cụ phát triển",
   "studio": "Studio",
-  "rename_the_module": "Rename the module",
-  "build_mobulde": "Build modules"
+  "rename_the_module": "Đổi tên mô-đun",
+  "build_modules": "Xây dựng mô-đun",
+  "subpanel_history": "Lịch sử Subpanel",
+  "display_module": "Hiển thị và tệp phụ mô-đun",
+  "module_loader": "Bộ nạp mô-đun",
+  "configure_module": "Cấu hình, lọc mô-đun"
 }

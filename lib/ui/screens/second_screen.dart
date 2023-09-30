@@ -91,7 +91,7 @@ class SecondScreen extends StatelessWidget {
                 ),
                 GridItem(
                   title: 'internal',
-                  icon: Ionicons.settings_outline,
+                  icon: Ionicons.invert_mode_sharp,
                   url: '',
                 ),
                 GridItem(
@@ -197,6 +197,57 @@ class SecondScreen extends StatelessWidget {
                 ),
               ],
             ),
+            const TextDivider(text: 'development_tools'),
+            LinkCard(
+                title: 'development_tools',
+                icon: MdiIcons.developerBoard,
+                url: ''),
+            GridView.count(
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 2 / 1,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              shrinkWrap: true,
+              children: [
+                const GridItem(
+                  title: 'studio',
+                  icon: Ionicons.color_palette,
+                  url: '',
+                ),
+                GridItem(
+                  title: 'rename_the_module',
+                  icon: MdiIcons.renameOutline,
+                  url: '',
+                ),
+                const GridItem(
+                  title: 'build_modules',
+                  icon: Ionicons.build_outline,
+                  url: '',
+                ),
+                GridItem(
+                  title: 'subpanel_history',
+                  icon: MdiIcons.history,
+                  url: '',
+                ),
+                GridItem(
+                  title: 'display_module',
+                  icon: MdiIcons.viewListOutline,
+                  url: '',
+                ),
+                GridItem(
+                  title: 'module_loader',
+                  icon: MdiIcons.downloadCircleOutline,
+                  url: '',
+                ),
+                GridItem(
+                  title: 'configure_module',
+                  icon: MdiIcons.contactsOutline,
+                  url: '',
+                ),
+              ],
+            ),
+
             const SizedBox(height: 36),
           ]),
     );

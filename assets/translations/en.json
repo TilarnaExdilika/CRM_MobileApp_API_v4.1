@@ -2,7 +2,7 @@
   "app_name": "SuiteCRM API v4.1",
 
   "bottom_nav_first": "Home",
-  "bottom_nav_second": "Info",
+  "bottom_nav_second": "Admin",
 
   "localization_title": "Localization",
   "localization_content": "Simplified translations with the Easy Translations package.",
@@ -79,6 +79,10 @@
   "development_tools": "Development tools",
   "studio": "Studio",
   "rename_the_module": "Rename the module",
-  "build_mobulde": "Build modules"
+  "build_modules": "Build modules",
+  "subpanel_history": "Subpanel History",
+  "display_module": "Display Module and Subfile",
+  "module_loader": "Module loader",
+  "configure_module": "Configure the menu filter module"
 
 }
