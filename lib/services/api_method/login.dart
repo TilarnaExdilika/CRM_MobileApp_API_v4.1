@@ -1,44 +1,27 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<void> loginToSuiteCRM() async {
-  const String loginUrl = 'http://example.com/suitecrm/service/v4_1/rest.php';
-  const String getEntryListUrl =
-      'http://example.com/suitecrm/service/v4_1/rest.php';
+Future<void> loginAndFetchLeads() async {
+  const String apiUrl = 'http://example.com/suitecrm/service/v4_1/rest.php';
 
-  // Đối tượng chứa thông tin đăng nhập
-  final Map<String, dynamic> loginData = {
-    "user_auth": {
-      "user_name": "nv",
-      "password": "7d790f9e30034b34eac3886d31848d28"
+  final loginData = {
+    'user_auth': {
+      'user_name': 'nv',
+      'password': '7d790f9e30034b34eac3886d31848d28',
     },
-    "application_name": "TEST API",
-    "name_value_list": [],
-    "deleted": "0"
+    'application_name': 'TEST API',
+    'name_value_list': [],
+    'deleted': '0',
   };
 
-  // Đối tượng chứa yêu cầu get_entry_list cho module "Leads"
-  final Map<String, dynamic> entryListRequest = {
-    'session': '', // Thay thế bằng session ID nhận được từ yêu cầu đăng nhập
-    'module_name': 'Leads',
-    'query': '',
-    'link_name_to_fields_array': [],
-    'order_by': '',
-    'offset': 0,
-    'select_fields': ['id', 'name'],
-    'max_results': 10,
-    'deleted': 0,
-  };
-
-  // Đăng nhập để nhận session ID
   final loginResponse = await http.post(
-    Uri.parse(loginUrl),
+    Uri.parse(apiUrl),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'method': 'login',
       'input_type': 'JSON',
       'response_type': 'JSON',
-      'rest_data': loginData
+      'rest_data': loginData,
     }),
   );
 
@@ -47,18 +30,26 @@ Future<void> loginToSuiteCRM() async {
         json.decode(loginResponse.body);
     final String sessionId = loginJsonResponse['id'];
 
-    // Cập nhật session ID trong yêu cầu get_entry_list
-    entryListRequest['session'] = sessionId;
+    final entryListRequest = {
+      'session': sessionId,
+      'module_name': 'Leads',
+      'query': '',
+      'link_name_to_fields_array': [],
+      'order_by': '',
+      'offset': 0,
+      'select_fields': ['id', 'name'],
+      'max_results': 10,
+      'deleted': 0,
+    };
 
-    // Gửi yêu cầu get_entry_list
     final entryListResponse = await http.post(
-      Uri.parse(getEntryListUrl),
+      Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'method': 'get_entry_list',
         'input_type': 'JSON',
         'response_type': 'JSON',
-        'rest_data': entryListRequest
+        'rest_data': entryListRequest,
       }),
     );
 
@@ -76,5 +67,5 @@ Future<void> loginToSuiteCRM() async {
 }
 
 void main() async {
-  await loginToSuiteCRM();
+  await loginAndFetchLeads();
 }
