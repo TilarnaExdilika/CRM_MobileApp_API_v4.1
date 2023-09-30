@@ -1,0 +1,84 @@
+{
+  "app_name": "SuiteCRM API v4.1",
+
+  "bottom_nav_first": "Home",
+  "bottom_nav_second": "Info",
+
+  "localization_title": "Localization",
+  "localization_content": "Simplified translations with the Easy Translations package.",
+
+  "linting_title": "Linting",
+  "linting_content": "Stricter linting rules with flutter lints recommended by the Dart team.",
+
+  "storage_title": "Storage",
+  "storage_content": "Blazing fast key-value database written in pure Dart with Hive.",
+
+  "dark_mode_title": "Dark Mode",
+  "dark_mode_content": "Smooth transition to dark mode by using the inbuilt theming engine.",
+
+  "state_title": "State",
+  "state_content": "Powerful state management using Cubit & BLOC.",
+
+  "display_title": "Display",
+  "display_content": "Support for high refresh rate displays with the flutter displaymode package.",
+
+  "language_switch_title": "Use Vietnamese",
+
+  "github_card_title": "GitHub repository",
+  "website_card_title": "Developer website",
+  "twitter_card_title": "Twitter",
+  "instagram_card_title": "Instagram",
+  "donate_card_title": "Donate",
+
+  "author_divider_title": "Administrators",
+  "packages_divider_title": "Management System",
+
+  "flutter_bloc": "Flutter bloc",
+  "bloc": "Bloc",
+  "hydrated_bloc": "Hydrated bloc",
+  "equatable": "Equatable",
+  "lints": "Flutter Lints",
+  "path_provider": "Path provider",
+  "flutter_displaymode": "Displaymode",
+  "easy_localization": "Easy localization",
+  "hive": "Hive",
+  "url_launcher": "Url launcher",
+  "ionicons": "Ionicons",
+
+  "user_title": "Users management",
+  "user": "User",
+  "role": "Role",
+  "password": "Password",
+  "security_groups": "security groups",
+  "confidential_security": "Confidential security",
+
+  "system_title" : "System",
+  "system_settings": "System settings",
+  "import_wizard": "Import Wizard",
+  "internal": "internal",
+  "upgrader": "Upgrader",
+  "currency": "Currency",
+  "backup": "Backup",
+  "language": "Language",
+  "repair": "Repair",
+  "diagnostic_information": "Diagnostic information",
+  "connect": "Connect",
+  "topic": "Topic",
+  "schedule": "Schedule",
+  "activity_stream_settings": "Activity stream settings",
+  "oauth_key_code": "OAuth key code",
+  "oauth2_clients_and_tokens": "OAuth2 Clients and Tokens",
+
+  "email_title": "Email management",
+  "custom_email": "Custom email",
+  "inbox": "Inbox",
+  "email_sent": "Email sent",
+  "email_campaigns": "Email campaigns",
+  "email_queue": "Email queue",
+
+  "development_tools": "Development tools",
+  "studio": "Studio",
+  "rename_the_module": "Rename the module",
+  "build_mobulde": "Build modules"
+
+}

@@ -1,0 +1,83 @@
+{
+  "app_name": "SuiteCRM API v4.1",
+
+  "bottom_nav_first": "Trang chủ",
+  "bottom_nav_second": "Admin",
+
+  "localization_title": "Bán hàng",
+  "localization_content": "Bản dịch đơn giản với gói Easy Translations.",
+
+  "linting_title": "Marketing",
+  "linting_content": "Các quy tắc linting nghiêm ngặt hơn với Flutter Lints, được Google khuyến nghị.",
+
+  "storage_title": "Sản phẩm",
+  "storage_content": "Cơ sở dữ liệu cực nhanh được viết bằng Dart thuần với Hive.",
+
+  "dark_mode_title": "Chế độ tối",
+  "dark_mode_content": "Chuyển đổi mượt mà sang chế độ tối nhờ công cụ tạo chủ đề tích hợp sẵn.",
+
+  "state_title": "Tính lương",
+  "state_content": "Quản lý trạng thái mạnh mẽ với Cubit & BLOC.",
+
+  "display_title": "Quản lý KPI",
+  "display_content": "Hỗ trợ màn hình tần số quét cao thông qua Flutter Displaymode.",
+
+  "language_switch_title": "Sử dụng tiếng Việt",
+
+  "github_card_title": "Kho lưu trữ GitHub",
+  "website_card_title": "Trang web của nhà phát triển",
+  "twitter_card_title": "Twitter",
+  "instagram_card_title": "Instagram",
+  "donate_card_title": "Ủng hộ",
+
+  "author_divider_title": "Quản trị viên",
+  "packages_divider_title": "Quản lý hệ thống",
+
+  "flutter_bloc": "Flutter bloc",
+  "bloc": "Bloc",
+  "hydrated_bloc": "Hydrated bloc",
+  "equatable": "Equatable",
+  "lints": "Flutter Lints",
+  "path_provider": "Path provider",
+  "flutter_displaymode": "Displaymode",
+  "easy_localization": "Easy localization",
+  "hive": "Hive",
+  "url_launcher": "Url launcher",
+  "ionicons": "Ionicons",
+
+  "user_title": "Quản lý người dùng",
+  "user": "Người dùng",
+  "role": "Vai trò",
+  "password": "Mật khẩu",
+  "security_groups": "Nhóm bảo mật",
+  "confidential_security": "Thiết đặt bảo mật",
+
+  "system_title": "Hệ thống",
+  "system_settings": "Cài đặt hệ thống",
+  "import_wizard": "Trình hướng dẫn nhập",
+  "internal": "Nội bộ",
+  "upgrader": "Chương trình nâng cấp",
+  "currency": "Tiền tệ",
+  "backup": "Sao lưu",
+  "language": "Ngôn ngữ",
+  "repair": "Sửa chữa",
+  "diagnostic_information": "Thông tin chẩn đoán",
+  "connect": "Kết nối",
+  "topic": "Chủ đề",
+  "schedule": "Lịch trình",
+  "activity_stream_settings": "Cài đặt luồng hoạt động",
+  "oauth_key_code": "Mã khóa OAuth",
+  "oauth2_clients_and_tokens": "Máy khách và mã thông báo OAuth2",
+
+  "email_title": "Quản lý Email",
+  "custom_email": "Tùy chỉnh email",
+  "inbox": "Hộp thư đến",
+  "email_sent": "Email đã gửi",
+  "email_campaigns": "Hoạt động email",
+  "email_queue": "Hàng đợi queue",
+
+  "development_tools": "Development tools",
+  "studio": "Studio",
+  "rename_the_module": "Rename the module",
+  "build_mobulde": "Build modules"
+}
