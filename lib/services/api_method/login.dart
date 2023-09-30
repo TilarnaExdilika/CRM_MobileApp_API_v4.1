@@ -1,62 +1,21 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class User {
-  final String id;
-  final String moduleName;
-  final String userId;
-  final String userName;
-  final String userLanguage;
-  final bool userIsAdmin;
-  final String userDefaultDateFormat;
-  final String userDefaultTimeFormat;
-  final String userNumberSeparator;
-  final String userDecimalSeparator;
-  final String userCurrencyName;
-
-  User({
-    required this.id,
-    required this.moduleName,
-    required this.userId,
-    required this.userName,
-    required this.userLanguage,
-    required this.userIsAdmin,
-    required this.userDefaultDateFormat,
-    required this.userDefaultTimeFormat,
-    required this.userNumberSeparator,
-    required this.userDecimalSeparator,
-    required this.userCurrencyName,
-  });
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    final nameValueList = json['name_value_list'];
-    return User(
-      id: json['id'],
-      moduleName: json['module_name'],
-      userId: nameValueList['user_id']['value'],
-      userName: nameValueList['user_name']['value'],
-      userLanguage: nameValueList['user_language']['value'],
-      userIsAdmin: nameValueList['user_is_admin']['value'],
-      userDefaultDateFormat: nameValueList['user_default_dateformat']['value'],
-      userDefaultTimeFormat: nameValueList['user_default_timeformat']['value'],
-      userNumberSeparator: nameValueList['user_number_seperator']['value'],
-      userDecimalSeparator: nameValueList['user_decimal_seperator']['value'],
-      userCurrencyName: nameValueList['user_currency_name']['value'],
-    );
-  }
-}
-
 Future<void> loginToSuiteCRM() async {
-  final String apiUrl =
-      'https://suitecrm8.longphatcrm.vn/service/v4_1/rest.php';
-  final Map<String, dynamic> requestData = {
-    "user_auth": {
-      "user_name": "nv",
-      "password": "7d790f9e30034b34eac3886d31848d28"
-    },
-    "application_name": "TEST API",
-    "name_value_list": [],
-    "deleted": "0"
+  const String apiUrl = 'http://example.com/suitecrm/service/v4_1/rest.php';
+
+  final userAuth = {
+    'user_name': 'nv',
+    'password': '7d790f9e30034b34eac3886d31848d28',
+  };
+
+  const appName = 'My SuiteCRM REST Client';
+  final nameValueList = {};
+
+  final args = {
+    'user_auth': userAuth,
+    'application_name': appName,
+    'name_value_list': nameValueList,
   };
 
   final response = await http.post(
@@ -64,15 +23,51 @@ Future<void> loginToSuiteCRM() async {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: jsonEncode(requestData),
+    body: jsonEncode(args),
   );
 
   if (response.statusCode == 200) {
-    print('Login Successful:');
-    final Map<String, dynamic> jsonBody = json.decode(response.body);
-    final user = User.fromJson(jsonBody);
-    print('User ID: ${user.userId}');
-    // In ra các thuộc tính khác của user tại đây...
+    final Map<String, dynamic> jsonResponse = json.decode(response.body);
+    final sessionId = jsonResponse['id'];
+
+    final entryArgs = {
+      'session': sessionId,
+      'module_name': 'Accounts',
+      'query': "accounts.billing_address_city = 'Ohio'",
+      'order_by': '',
+      'offset': 0,
+      'select_fields': ['id', 'name'],
+      'link_name_to_fields_array': [
+        {
+          'name': 'contacts',
+          'value': ['first_name', 'last_name']
+        }
+      ],
+      'max_results': 10,
+      'deleted': 0,
+    };
+
+    final entryResponse = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'method': 'get_entry_list',
+        'input_type': 'JSON',
+        'response_type': 'JSON',
+        'rest_data': entryArgs
+      }),
+    );
+
+    if (entryResponse.statusCode == 200) {
+      final Map<String, dynamic> entryJsonResponse =
+          json.decode(entryResponse.body);
+      print(entryJsonResponse);
+    } else {
+      print(
+          'Failed to retrieve entry list with status code: ${entryResponse.statusCode}');
+    }
   } else {
     print('Login Failed with status code: ${response.statusCode}');
   }
