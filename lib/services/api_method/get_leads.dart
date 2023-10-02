@@ -2,7 +2,7 @@
 
 import 'package:flutter_production_boilerplate/services/api_method/login.dart';
 
-Future<void> getLeads(String sessionId) async {
+Future<List<dynamic>> getLeads(String sessionId) async {
   final entryArgs = {
     'session': sessionId,
     'module_name': 'Leads',
@@ -21,7 +21,11 @@ Future<void> getLeads(String sessionId) async {
   };
 
   final entryListResult = await restRequest('get_entry_list', entryArgs);
-  print(entryListResult);
+
+  // Lấy danh sách leads từ kết quả API
+  List<dynamic> leads = entryListResult['entry_list'];
+
+  return leads;
 }
 
 void main() async {

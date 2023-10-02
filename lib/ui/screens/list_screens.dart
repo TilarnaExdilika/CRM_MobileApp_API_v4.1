@@ -1,30 +1,59 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate/ui/widgets/header.dart';
-import 'package:flutter_production_boilerplate/ui/widgets/list_screen/list_card.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:flutter_production_boilerplate/services/api_method/get_leads.dart';
+import 'package:flutter_production_boilerplate/services/api_method/login.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+class ListScreen extends StatefulWidget {
+  @override
+  _ListScreenState createState() => _ListScreenState();
+}
+
+class _ListScreenState extends State<ListScreen> {
+  List<dynamic> leads = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final userAuth = {
+      'user_name': 'nv',
+      'password': '7d790f9e30034b34eac3886d31848d28',
+    };
+    const appName = 'My SuiteCRM REST Client';
+    final nameValueList = [];
+
+    final loginResult = await login(
+        'nv', '7d790f9e30034b34eac3886d31848d28', appName, nameValueList);
+    final sessionId = loginResult['id'];
+
+    // Gọi hàm getLeads để lấy danh sách leads từ API
+    List<dynamic> leadsResult = await getLeads(sessionId);
+
+    setState(() {
+      leads = leadsResult;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Theme.of(context).backgroundColor,
-      child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          physics: const BouncingScrollPhysics(),
-          children: const [
-            Header(text: 'menu', logoPath: 'assets/img/logo.png'),
-            //List
-            ListCard(
-                title: 'name here',
-                icon: Ionicons.person_circle_outline,
-                url: ''),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('List of Leads'),
+      ),
+      body: ListView.builder(
+        itemCount: leads.length,
+        itemBuilder: (context, index) {
+          final leadName = leads[index]['name_value_list']['name']['value'];
 
-            SizedBox(height: 8),
-          ]),
+          return ListTile(
+            title: Text(leadName),
+          );
+        },
+      ),
     );
   }
 }
+
+void main() => runApp(MaterialApp(home: ListScreen()));
