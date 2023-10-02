@@ -32,7 +32,7 @@ class SkeletonScreen extends StatelessWidget {
           ),
 
           /// Cannot be const, tab status will not update.
-          bottomNavigationBar: BottomNavBar(),
+          bottomNavigationBar: const BottomNavBar(),
         ));
   }
 }

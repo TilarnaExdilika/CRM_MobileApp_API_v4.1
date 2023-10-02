@@ -45,6 +45,23 @@
   "url_launcher": "Url launcher",
   "ionicons": "Ionicons",
 
+  "-------------------------------------" : "------------------------------",
+  "sell" : "Sell",
+  "marketing" : "Marketing",
+  "product" : "Product",
+  "report" : "Report",
+  "payroll" : "Payroll",
+  "manage_kpis" : "Manage KPIs",
+  "system" : "System",
+  "all" : "All",
+
+  "------------------------------------" : "------------------------------",
+  "menu" : "Menu",
+
+
+
+  "-----------------------------------" : "------------------------------",
+
   "user_title": "Users management",
   "user": "User",
   "role": "Role",

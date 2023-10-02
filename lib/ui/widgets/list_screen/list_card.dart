@@ -25,7 +25,7 @@ class ListCard extends StatelessWidget {
         onTap: _launchUrl,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8))),
-        trailing: Icon(Ionicons.open_outline,
+        trailing: Icon(Ionicons.menu_outline,
             color: Theme.of(context).textTheme.subtitle2!.color),
         title: Row(
           children: [

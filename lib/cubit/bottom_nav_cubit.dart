@@ -8,4 +8,6 @@ class BottomNavCubit extends Cubit<int> {
   void getFirstScreen() => emit(0);
 
   void getSecondScreen() => emit(1);
+
+  void getListScreen() => emit(2);
 }

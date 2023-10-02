@@ -8,14 +8,16 @@ class InfoCard extends StatelessWidget {
   final String content;
   final IconData icon;
   final bool isPrimaryColor;
+  final VoidCallback onPressed;
 
-  const InfoCard(
-      {Key? key,
-      required this.title,
-      required this.content,
-      required this.icon,
-      required this.isPrimaryColor})
-      : super(key: key);
+  const InfoCard({
+    Key? key,
+    required this.title,
+    required this.content,
+    required this.icon,
+    required this.isPrimaryColor,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +31,31 @@ class InfoCard extends StatelessWidget {
           : Theme.of(context).cardColor,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8))),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              tr(title),
-              style: textTheme.headline6!.apply(fontFamily: 'Poppins'),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              tr(content),
-              style: textTheme.subtitle2,
-            ),
-            const Spacer(),
-            Icon(
-              icon,
-              size: 32,
-              color: textTheme.subtitle2!.color,
-            ),
-          ],
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                tr(title),
+                style: textTheme.headline6!.apply(fontFamily: 'Poppins'),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                tr(content),
+                style: textTheme.subtitle2,
+              ),
+              const Spacer(),
+              Icon(
+                icon,
+                size: 32,
+                color: textTheme.subtitle2!.color,
+              ),
+            ],
+          ),
         ),
       ),
     );

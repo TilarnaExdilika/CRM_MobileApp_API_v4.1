@@ -4,23 +4,23 @@
   "bottom_nav_first": "Trang chủ",
   "bottom_nav_second": "Quản lý",
 
-  "localization_title": "Bán hàng",
-  "localization_content": "Bản dịch đơn giản với gói Easy Translations.",
+  "localization_title": "Localization",
+  "localization_content": "Simplified translations with the Easy Translations package.",
 
-  "linting_title": "Marketing",
-  "linting_content": "Các quy tắc linting nghiêm ngặt hơn với Flutter Lints, được Google khuyến nghị.",
+  "linting_title": "Linting",
+  "linting_content": "Stricter linting rules with flutter lints recommended by the Dart team.",
 
-  "storage_title": "Sản phẩm",
-  "storage_content": "Cơ sở dữ liệu cực nhanh được viết bằng Dart thuần với Hive.",
+  "storage_title": "Storage",
+  "storage_content": "Blazing fast key-value database written in pure Dart with Hive.",
 
-  "dark_mode_title": "Chế độ tối",
-  "dark_mode_content": "Chuyển đổi mượt mà sang chế độ tối nhờ công cụ tạo chủ đề tích hợp sẵn.",
+  "dark_mode_title": "Dark Mode",
+  "dark_mode_content": "Smooth transition to dark mode by using the inbuilt theming engine.",
 
-  "state_title": "Tính lương",
-  "state_content": "Quản lý trạng thái mạnh mẽ với Cubit & BLOC.",
+  "state_title": "State",
+  "state_content": "Powerful state management using Cubit & BLOC.",
 
-  "display_title": "Quản lý KPI",
-  "display_content": "Hỗ trợ màn hình tần số quét cao thông qua Flutter Displaymode.",
+  "display_title": "Display",
+  "display_content": "Support for high refresh rate displays with the flutter displaymode package.",
 
   "language_switch_title": "Sử dụng tiếng Việt",
 
@@ -44,6 +44,27 @@
   "hive": "Hive",
   "url_launcher": "Url launcher",
   "ionicons": "Ionicons",
+
+  "-------------------------------------" : "------------------------------",
+  "sell" : "Sell",
+  "marketing" : "Marketing",
+  "product" : "Product",
+  "report" : "Report",
+  "payroll" : "Payroll",
+  "manage_kpis" : "Manage KPIs",
+  "system" : "System",
+  "all" : "All",
+
+  "-----------------------------------" : "------------------------------",
+  
+  "menu" : "Danh mục",
+
+
+
+
+
+
+  "------------------------------------" : "------------------------------",
 
   "user_title": "Quản lý người dùng",
   "user": "Người dùng",
