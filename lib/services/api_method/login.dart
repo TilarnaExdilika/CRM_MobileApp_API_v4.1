@@ -44,8 +44,8 @@ Future<void> main() async {
 
   final entryArgs = {
     'session': sessionId,
-    'module_name': 'Accounts',
-    'query': "accounts.billing_address_city = 'Ohio'",
+    'module_name': 'Leads',
+    'query': "",
     'order_by': '',
     'offset': 0,
     'select_fields': ['id', 'name'],
