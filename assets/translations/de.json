@@ -62,6 +62,17 @@
   "list_insert" : "Thêm",
   "list_data" : "Danh sách",
   "list_search" : "Tìm kiếm",
+  "create" : "Tạo mới",
+
+  "name": "Tên",
+  "description": "Mô tả",
+  "salutation": "Chào hỏi",
+  "first_name": "Tên",
+  "last_name": "Họ",
+  "phone_mobile": "Điện thoại di động",
+  "account_name": "Tên tài khoản",
+  "account_description": "Mô tả tài khoản",
+  "opportunity_name": "Tên cơ hội",
 
 
   "------------------------------------" : "------------------------------",
