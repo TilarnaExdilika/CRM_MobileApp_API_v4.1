@@ -51,20 +51,20 @@ class BottomNavBar extends StatelessWidget {
         unselectedItemColor: Theme.of(context).textTheme.bodyText1!.color,
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Ionicons.play_back_outline),
-            label: tr('list_back'),
+            icon: const Icon(Ionicons.list_outline),
+            label: tr('list_data'),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Ionicons.add_outline),
             label: tr('list_insert'),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Ionicons.duplicate_outline),
-            label: tr('list_dup'),
-          ),
-          BottomNavigationBarItem(
             icon: const Icon(Ionicons.trash_bin_outline),
             label: tr('list_delete'),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Ionicons.play_back_outline),
+            label: tr('list_back'),
           ),
         ],
       ),
@@ -127,25 +127,31 @@ class _ListScreenState extends State<ListScreen> {
               ),
               // Danh sách ListCard sử dụng ListView.builder
               Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets
-                      .zero, // Đặt padding về 0 để không làm thay đổi padding của ListView
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: leads.length,
-                  itemBuilder: (context, index) {
-                    final lead = leads[index]['name_value_list'];
-                    final leadName = lead['name']['value'];
+                child: IndexedStack(
+                  index: _currentIndex,
+                  children: [
+                    // List Screen
+                    ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: leads.length,
+                      itemBuilder: (context, index) {
+                        final lead = leads[index]['name_value_list'];
+                        final leadName = lead['name']['value'];
 
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          top: 2), // Thêm khoảng cách giữa các ListCard
-                      child: ListCard(
-                        title: leadName,
-                        icon: Ionicons.logo_github,
-                        url: '',
-                      ),
-                    );
-                  },
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 2), // Thêm khoảng cách giữa các ListCard
+                          child: ListCard(
+                            title: leadName,
+                            icon: Ionicons.logo_github,
+                            url: '',
+                          ),
+                        );
+                      },
+                    ),
+                    const InsertScreen(),
+                  ],
                 ),
               ),
             ],
@@ -156,12 +162,28 @@ class _ListScreenState extends State<ListScreen> {
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
-            _currentIndex = index;
-            if (index == 0) {
-              Navigator.of(context).pop(); // Điều hướng về trang trước đó
+            if (index == 3) {
+              Navigator.of(context).pop();
+            } else if (index == 1) {
+              _currentIndex = 1;
+            } else {
+              _currentIndex = index;
             }
           });
         },
+      ),
+    );
+  }
+}
+
+class InsertScreen extends StatelessWidget {
+  const InsertScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text('Insert Screen Content'),
       ),
     );
   }

@@ -43,6 +43,7 @@ class ListCard extends StatelessWidget {
     );
   }
 
+  /// Example: Use the url_launcher package to open the browser
   void _launchUrl() async =>
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 }
