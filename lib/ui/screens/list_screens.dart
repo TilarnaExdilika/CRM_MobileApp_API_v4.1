@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/services/api_method/get_leads.dart';
 import 'package:flutter_production_boilerplate/services/api_method/login.dart';
-import 'package:flutter_production_boilerplate/ui/screens/first_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/insert_screens.dart';
 import 'package:flutter_production_boilerplate/ui/screens/search_srceen.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/custom_nav_bar.dart';
@@ -113,20 +112,17 @@ class _ListScreenState extends State<ListScreen> {
         onTap: (index) {
           setState(() {
             if (index == 3) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const FirstScreen()),
-              );
+              Navigator.pop(context);
             } else if (index == 1) {
               // Chuyển đến màn hình InsertScreen khi index là 1
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 NoAnimationPageRoute(
                     builder: (context) => const InsertScreen()),
               );
             } else if (index == 2) {
               // Chuyển đến màn hình SearchScreen khi index là 2
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 NoAnimationPageRoute(
                     builder: (context) => const SearchScreen()),

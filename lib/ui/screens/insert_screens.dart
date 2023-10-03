@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_production_boilerplate/ui/screens/first_screen.dart';
 import 'package:flutter_production_boilerplate/ui/screens/list_screens.dart';
 import 'package:flutter_production_boilerplate/ui/screens/search_srceen.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/custom_nav_bar.dart';
@@ -20,17 +19,14 @@ class InsertScreen extends StatelessWidget {
         currentIndex: currentIndex,
         onTap: (index) {
           if (index == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const FirstScreen()),
-            );
+            Navigator.pop(context);
           } else if (index == 2) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               NoAnimationPageRoute(builder: (context) => const SearchScreen()),
             );
           } else if (index == 0) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               NoAnimationPageRoute(builder: (context) => const ListScreen()),
             );
