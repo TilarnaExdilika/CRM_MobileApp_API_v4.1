@@ -162,7 +162,7 @@ class FirstScreen extends StatelessWidget {
                   title: 'payroll',
                   content: 'payroll',
                   icon: Ionicons.people_outline,
-                  isPrimaryColor: false,
+                  isPrimaryColor: true,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -186,7 +186,7 @@ class FirstScreen extends StatelessWidget {
                   title: 'system',
                   content: 'system',
                   icon: Ionicons.people_outline,
-                  isPrimaryColor: true,
+                  isPrimaryColor: false,
                   onPressed: () {
                     Navigator.push(
                       context,

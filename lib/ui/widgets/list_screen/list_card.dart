@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +31,7 @@ class ListCard extends StatelessWidget {
             Icon(icon, color: Theme.of(context).primaryColor),
             const SizedBox(width: 16),
             Text(
-              tr(title),
+              (title),
               style: Theme.of(context)
                   .textTheme
                   .subtitle1!

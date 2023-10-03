@@ -16,7 +16,7 @@ Future<List<dynamic>> getLeads(String sessionId) async {
         'value': ['first_name', 'last_name']
       }
     ],
-    'max_results': 10,
+    'max_results': 20,
     'deleted': 0,
   };
 
@@ -28,17 +28,17 @@ Future<List<dynamic>> getLeads(String sessionId) async {
   return leads;
 }
 
-void main() async {
-  final userAuth = {
-    'user_name': 'nv',
-    'password': '7d790f9e30034b34eac3886d31848d28',
-  };
-  const appName = 'My SuiteCRM REST Client';
-  final nameValueList = [];
+// void main() async {
+//   final userAuth = {
+//     'user_name': 'nv',
+//     'password': '7d790f9e30034b34eac3886d31848d28',
+//   };
+//   const appName = 'My SuiteCRM REST Client';
+//   final nameValueList = [];
 
-  final loginResult = await login(
-      'nv', '7d790f9e30034b34eac3886d31848d28', appName, nameValueList);
-  final sessionId = loginResult['id'];
+//   final loginResult = await login(
+//       'nv', '7d790f9e30034b34eac3886d31848d28', appName, nameValueList);
+//   final sessionId = loginResult['id'];
 
-  await getLeads(sessionId);
-}
+//   await getLeads(sessionId);
+// }

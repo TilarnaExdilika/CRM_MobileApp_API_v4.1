@@ -46,22 +46,22 @@
   "ionicons": "Ionicons",
 
   "-------------------------------------" : "------------------------------",
-  "sell" : "Sell",
+  "sell" : "Bán hàng",
   "marketing" : "Marketing",
-  "product" : "Product",
-  "report" : "Report",
-  "payroll" : "Payroll",
-  "manage_kpis" : "Manage KPIs",
-  "system" : "System",
+  "product" : "Sản phẩm",
+  "report" : "Báo cáo",
+  "payroll" : "Lương thưởng",
+  "manage_kpis" : "Quản lí KPI",
+  "system" : "Hệ thống",
   "all" : "All",
 
   "-----------------------------------" : "------------------------------",
   
   "menu" : "Danh mục",
-
-
-
-
+  "list_back" : "Trở về",
+  "list_insert" : "Thêm",
+  "list_dup" : "Nhân bản",
+  "list_delete" : "Xóa",
 
 
   "------------------------------------" : "------------------------------",
