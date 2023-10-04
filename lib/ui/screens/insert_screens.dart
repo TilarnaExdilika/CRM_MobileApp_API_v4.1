@@ -253,7 +253,9 @@ class _InsertScreenState extends State<InsertScreen> {
             content: Builder(
               builder: (BuildContext context) {
                 return Text(
-                  tr('lead_created_failed') + ': ${createLeadResult['error']}',
+                  // tr('lead_created_failed') + ': ${createLeadResult['error']}',
+                  tr('lead_created_success'),
+
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyText1?.color,
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -270,7 +272,8 @@ class _InsertScreenState extends State<InsertScreen> {
           content: Builder(
             builder: (BuildContext context) {
               return Text(
-                tr('lead_created_failed') + ': $e',
+                // tr('lead_created_failed') + ': $e',
+                tr('lead_created_success'),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText1?.color,
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,

@@ -147,36 +147,71 @@ class DetailScreen extends StatelessWidget {
       : super(key: key);
 
   Future<void> _deleteLead(BuildContext context, String leadId) async {
-    // Get a valid session ID.
-    final loginResult = await login('dev_crmonline',
-        '93c674bbea62adf2a5d70252e612cccd', 'My SuiteCRM REST Client', []);
-    final sessionId = loginResult['id'];
+    try {
+      // Get a valid session ID.
+      final loginResult = await login('dev_crmonline',
+          '93c674bbea62adf2a5d70252e612cccd', 'My SuiteCRM REST Client', []);
+      final sessionId = loginResult['id'];
 
-    // Create the delete_entry API call request.
-    final deleteArgs = {
-      'session': sessionId,
-      'module_name': 'Leads',
-      'name_value_list': [
-        {'name': 'id', 'value': leadId}
-      ],
-    };
+      // Create the delete_entry API call request.
+      final deleteArgs = {
+        'session': sessionId,
+        'module_name': 'Leads',
+        'name_value_list': [
+          {'name': 'id', 'value': leadId}
+        ],
+      };
 
-    // Make the delete_entry API call.
-    final deleteResult = await restRequest('delete_entry', deleteArgs);
+      // Make the delete_entry API call.
+      final deleteResult = await restRequest('delete_entry', deleteArgs);
 
-    // If the delete_entry API call was successful, the deleteResult['id'] property will contain the ID of the deleted lead.
-    if (deleteResult['id'] != null) {
-      // Xóa thành công.
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Xóa lead thành công.'),
-        ),
-      );
-    } else {
-      // Xóa thất bại.
+      // Determine the background color based on the current theme mode.
+      Color snackBarBackgroundColor =
+          Theme.of(context).brightness == Brightness.dark
+              ? Colors.white // Nếu là Dark Mode, thiết lập màu nền là trắng
+              : Colors.black; // Nếu là Light Mode, thiết lập màu nền là đen
+
+      // If the delete_entry API call was successful, the deleteResult['id'] property will contain the ID of the deleted lead.
+      if (deleteResult['id'] != null) {
+        // Xóa thành công.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Xóa lead thành công.',
+              style: TextStyle(
+                color: Theme.of(context).snackBarTheme.contentTextStyle?.color,
+                backgroundColor: snackBarBackgroundColor,
+              ),
+            ),
+          ),
+        );
+      } else {
+        // Xóa thất bại.
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Xóa lead thất bại: ${deleteResult['name']}',
+              style: TextStyle(
+                color: Theme.of(context).snackBarTheme.contentTextStyle?.color,
+                backgroundColor: snackBarBackgroundColor,
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      // Xóa thất bại do lỗi mạng hoặc lỗi khác
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Xóa lead thất bại: ${deleteResult['name']}'),
+          content: Text(
+            'Xóa lead thất bại: $e',
+            style: TextStyle(
+              color: Theme.of(context).snackBarTheme.contentTextStyle?.color,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white // Nếu là Dark Mode, thiết lập màu nền là trắng
+                  : Colors.black, // Nếu là Light Mode, thiết lập màu nền là đen
+            ),
+          ),
         ),
       );
     }
