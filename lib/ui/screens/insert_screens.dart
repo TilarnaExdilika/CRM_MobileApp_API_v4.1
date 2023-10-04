@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_production_boilerplate/services/api_method/create_lead.dart';
+import 'package:flutter_production_boilerplate/services/api_method/login.dart';
 import 'package:flutter_production_boilerplate/ui/screens/list_screens.dart';
 import 'package:flutter_production_boilerplate/ui/screens/search_srceen.dart';
 import 'package:flutter_production_boilerplate/ui/widgets/custom_nav_bar.dart';
@@ -15,134 +17,155 @@ class InsertScreen extends StatefulWidget {
 }
 
 class _InsertScreenState extends State<InsertScreen> {
-  late TextEditingController nameController;
-  late TextEditingController descriptionController;
-  late TextEditingController salutationController;
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
-  late TextEditingController mobilePhoneController;
-  late TextEditingController accountNameController;
-  late TextEditingController accountDescriptionController;
-  late TextEditingController opportunityNameController;
+  late TextEditingController _nameController;
+  late TextEditingController _salutationController;
+  late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
+  late TextEditingController _mobilePhoneController;
+  late TextEditingController _accountNameController;
+  late TextEditingController _accountDescriptionController;
+  late TextEditingController _opportunityNameController;
+  late TextEditingController _opportunityAmountController;
+
+  late String _sessionId;
 
   final int currentIndex = 1;
 
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController(text: "");
-    descriptionController = TextEditingController(text: "");
-    salutationController = TextEditingController(text: "");
-    firstNameController = TextEditingController(text: "");
-    lastNameController = TextEditingController(text: "");
-    mobilePhoneController = TextEditingController(text: "");
-    accountNameController = TextEditingController(text: "");
-    accountDescriptionController = TextEditingController(text: "");
-    opportunityNameController = TextEditingController(text: "");
+    _nameController = TextEditingController();
+    _salutationController = TextEditingController();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _mobilePhoneController = TextEditingController();
+    _accountNameController = TextEditingController();
+    _accountDescriptionController = TextEditingController();
+    _opportunityNameController = TextEditingController();
+    _opportunityAmountController = TextEditingController();
+
+    _getSessionId();
+  }
+
+  Future<void> _getSessionId() async {
+    final loginResult = await login(
+      'nv',
+      '7d790f9e30034b34eac3886d31848d28',
+      'My SuiteCRM REST Client',
+      [],
+    );
+    setState(() {
+      _sessionId = loginResult['id'];
+    });
   }
 
   @override
   void dispose() {
-    nameController.dispose();
-    descriptionController.dispose();
-    salutationController.dispose();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    mobilePhoneController.dispose();
-    accountNameController.dispose();
-    accountDescriptionController.dispose();
-    opportunityNameController.dispose();
+    _nameController.dispose();
+    _salutationController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _mobilePhoneController.dispose();
+    _accountNameController.dispose();
+    _accountDescriptionController.dispose();
+    _opportunityNameController.dispose();
+    _opportunityAmountController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // ignore: deprecated_member_use
-        color: Theme.of(context).backgroundColor,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Header(
-                text: 'bottom_nav_second',
-                logoPath: 'assets/img/logo.png',
+      appBar: AppBar(
+        title: const Text('Create Lead'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Header(
+                  text: 'bottom_nav_second',
+                  logoPath: 'assets/img/logo.png',
+                ),
               ),
-            ),
-            DynamicInputCard(
-              label: tr('name'),
-              controller: nameController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('description'),
-              controller: descriptionController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('salutation'),
-              controller: salutationController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('first_name'),
-              controller: firstNameController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('last_name'),
-              controller: lastNameController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('phone_mobile'),
-              controller: mobilePhoneController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('account_name'),
-              controller: accountNameController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('account_description'),
-              controller: accountDescriptionController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            DynamicInputCard(
-              label: tr('opportunity_name'),
-              controller: opportunityNameController,
-              onChanged: (newValue) {
-                // onChanged logic if needed
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Kiểm tra xem các giá trị có hợp lệ hay không (nếu cần)
-                // Gửi các giá trị lên API để tạo leads mới
-                createNewLead();
-              },
-              child: Text(tr('create')),
-            ),
-          ],
+              const SizedBox(height: 16), // Khoảng cách giữa các trường nhập
+              DynamicInputCard(
+                label: tr('name'),
+                controller: _nameController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('salutation'),
+                controller: _salutationController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('first_name'),
+                controller: _firstNameController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('last_name'),
+                controller: _lastNameController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('phone_mobile'),
+                controller: _mobilePhoneController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('account_name'),
+                controller: _accountNameController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('account_description'),
+                controller: _accountDescriptionController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('opportunity_name'),
+                controller: _opportunityNameController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              DynamicInputCard(
+                label: tr('opportunity_amount'),
+                controller: _opportunityAmountController,
+                onChanged: (newValue) {
+                  // onChanged logic if needed
+                },
+              ),
+              const SizedBox(
+                  height: 24), // Khoảng cách giữa các trường nhập và nút Create
+              ElevatedButton(
+                onPressed: () async {
+                  await _createNewLead();
+                },
+                child: const Text('Create'),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomCustomNavBar(
@@ -166,7 +189,41 @@ class _InsertScreenState extends State<InsertScreen> {
     );
   }
 
-  void createNewLead() {
-    // Lấy giá trị từ các controllers để tạo đối tượng JSON hoặc thực hiện các hành động khác tùy thuộc vào yêu cầu của bạn.
+  Future<void> _createNewLead() async {
+    try {
+      final createLeadResult = await createLead(
+        _sessionId,
+        _nameController.text,
+        _salutationController.text,
+        _firstNameController.text,
+        _lastNameController.text,
+        _mobilePhoneController.text,
+        _accountNameController.text,
+        _accountDescriptionController.text,
+        _opportunityNameController.text,
+        int.parse(_opportunityAmountController.text),
+      );
+
+      if (createLeadResult['success']) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(tr('lead_created_success')),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+                tr('lead_created_failed') + ': ${createLeadResult['error']}'),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(tr('lead_created_failed') + ': $e'),
+        ),
+      );
+    }
   }
 }
