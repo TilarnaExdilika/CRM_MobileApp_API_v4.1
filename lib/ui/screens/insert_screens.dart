@@ -49,8 +49,8 @@ class _InsertScreenState extends State<InsertScreen> {
 
   Future<void> _getSessionId() async {
     final loginResult = await login(
-      'nv',
-      '7d790f9e30034b34eac3886d31848d28',
+      'dev_crmonline',
+      '93c674bbea62adf2a5d70252e612cccd',
       'My SuiteCRM REST Client',
       [],
     );
@@ -76,9 +76,6 @@ class _InsertScreenState extends State<InsertScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Lead'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -190,6 +187,15 @@ class _InsertScreenState extends State<InsertScreen> {
   }
 
   Future<void> _createNewLead() async {
+    // ignore: unnecessary_null_comparison
+    if (_sessionId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(tr('session_id_null_error')),
+        ),
+      );
+      return;
+    }
     try {
       final createLeadResult = await createLead(
         _sessionId,
