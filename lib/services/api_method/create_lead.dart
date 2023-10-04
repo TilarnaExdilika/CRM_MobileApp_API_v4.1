@@ -57,27 +57,3 @@ Future<Map<String, dynamic>> restRequest(
 
   return jsonDecode(response.body);
 }
-// void main() async {
-//   // Đầu tiên, bạn cần đăng nhập để lấy session id
-//   final sessionId = await login(
-//       'nv', '7d790f9e30034b34eac3886d31848d28', 'My SuiteCRM REST Client', []);
-
-//   if (sessionId.containsKey('id')) {
-//     // Nếu đăng nhập thành công, tiến hành tạo mới lead
-//     final createLeadResult = await createLead(
-//       sessionId['id'],
-//       'New Lead',
-//       'Mr.',
-//       'John',
-//       'Doe',
-//       '+1234567890',
-//       'ACME Corporation',
-//       'A company description',
-//       'New Opportunity',
-//       '10000',
-//     );
-//     print(createLeadResult);
-//   } else {
-//     print('Failed to login');
-//   }
-// }

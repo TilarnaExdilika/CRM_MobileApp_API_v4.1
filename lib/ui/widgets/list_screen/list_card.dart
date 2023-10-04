@@ -9,6 +9,7 @@ class ListCard extends StatelessWidget {
   final IconData icon;
   final String url;
   final String leadId;
+  final String leadName;
 
   const ListCard({
     Key? key,
@@ -16,6 +17,7 @@ class ListCard extends StatelessWidget {
     required this.icon,
     required this.url,
     required this.leadId,
+    required this.leadName,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,10 @@ class ListCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DetailScreen(leadId: leadId),
+              builder: (context) => DetailScreen(
+                leadId: leadId,
+                leadName: leadName,
+              ),
             ),
           );
         },

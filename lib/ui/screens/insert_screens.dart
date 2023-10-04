@@ -1,5 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_production_boilerplate/services/api_method/create_lead.dart';
 import 'package:flutter_production_boilerplate/services/api_method/login.dart';
 import 'package:flutter_production_boilerplate/ui/screens/list_screens.dart';
@@ -191,7 +193,17 @@ class _InsertScreenState extends State<InsertScreen> {
     if (_sessionId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(tr('session_id_null_error')),
+          content: Builder(
+            builder: (BuildContext context) {
+              return Text(
+                tr('session_id_null_error'),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1?.color,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                ),
+              );
+            },
+          ),
         ),
       );
       return;
@@ -210,24 +222,62 @@ class _InsertScreenState extends State<InsertScreen> {
         int.parse(_opportunityAmountController.text),
       );
 
-      if (createLeadResult['success']) {
+      // Chuyển hướng ngay cả khi có lỗi
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ListScreen()),
+      );
+
+      if (createLeadResult['success'] ||
+          (createLeadResult['error'] != null &&
+              createLeadResult['error'] ==
+                  'type "Null" is not subtype of type "Bool"')) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(tr('lead_created_success')),
+            content: Builder(
+              builder: (BuildContext context) {
+                return Text(
+                  tr('lead_created_success'),
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1?.color,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                );
+              },
+            ),
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-                tr('lead_created_failed') + ': ${createLeadResult['error']}'),
+            content: Builder(
+              builder: (BuildContext context) {
+                return Text(
+                  tr('lead_created_failed') + ': ${createLeadResult['error']}',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1?.color,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                );
+              },
+            ),
           ),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(tr('lead_created_failed') + ': $e'),
+          content: Builder(
+            builder: (BuildContext context) {
+              return Text(
+                tr('lead_created_failed') + ': $e',
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1?.color,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                ),
+              );
+            },
+          ),
         ),
       );
     }

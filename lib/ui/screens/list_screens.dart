@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_production_boilerplate/services/api_method/get_leads.dart';
 import 'package:flutter_production_boilerplate/services/api_method/login.dart';
@@ -56,7 +58,6 @@ class _ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Material(
-        // ignore: deprecated_member_use
         color: Theme.of(context).backgroundColor,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -96,6 +97,7 @@ class _ListScreenState extends State<ListScreen> {
                             icon: Ionicons.logo_github,
                             url: '',
                             leadId: leadId,
+                            leadName: leadName,
                           ),
                         );
                       },
@@ -139,15 +141,99 @@ class _ListScreenState extends State<ListScreen> {
 
 class DetailScreen extends StatelessWidget {
   final String leadId;
+  final String leadName;
 
-  const DetailScreen({Key? key, required this.leadId}) : super(key: key);
+  const DetailScreen({Key? key, required this.leadId, required this.leadName})
+      : super(key: key);
+
+  Future<void> _deleteLead(BuildContext context, String leadId) async {
+    // Get a valid session ID.
+    final loginResult = await login('dev_crmonline',
+        '93c674bbea62adf2a5d70252e612cccd', 'My SuiteCRM REST Client', []);
+    final sessionId = loginResult['id'];
+
+    // Create the delete_entry API call request.
+    final deleteArgs = {
+      'session': sessionId,
+      'module_name': 'Leads',
+      'name_value_list': [
+        {'name': 'id', 'value': leadId}
+      ],
+    };
+
+    // Make the delete_entry API call.
+    final deleteResult = await restRequest('delete_entry', deleteArgs);
+
+    // If the delete_entry API call was successful, the deleteResult['id'] property will contain the ID of the deleted lead.
+    if (deleteResult['id'] != null) {
+      // Xóa thành công.
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Xóa lead thành công.'),
+        ),
+      );
+    } else {
+      // Xóa thất bại.
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Xóa lead thất bại: ${deleteResult['name']}'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Sử dụng giá trị leadId để hiển thị thông tin tương ứng trong DetailScreen
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       body: Center(
-        child: Text('id khách hàng: $leadId'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('ID khách hàng: $leadId'),
+            Text('Tên khách hàng: $leadName'),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _deleteLead(context,
+                        leadId); // Gọi hàm xóa lead khi nút Xóa được nhấn
+                  },
+                  child: const Text('Xóa'),
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    // Xử lý logic khi nút Sửa được nhấn
+                  },
+                  child: const Text('Sửa'),
+                  style: ElevatedButton.styleFrom(primary: Colors.amber),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    // Xử lý logic khi nút Sao chép được nhấn
+                  },
+                  child: const Text('Sao chép'),
+                  style: ElevatedButton.styleFrom(
+                    primary: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Trở về trang trước
+                  },
+                  child: const Text('Trở lại'),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
