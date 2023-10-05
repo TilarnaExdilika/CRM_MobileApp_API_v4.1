@@ -153,26 +153,28 @@ class DetailScreen extends StatelessWidget {
           '93c674bbea62adf2a5d70252e612cccd', 'My SuiteCRM REST Client', []);
       final sessionId = loginResult['id'];
 
-      // Create the delete_entry API call request.
-      final deleteArgs = {
+      final setEntryArgs = {
         'session': sessionId,
         'module_name': 'Leads',
         'name_value_list': [
-          {'name': 'id', 'value': leadId}
+          {'name': 'id', 'value': leadId},
+          {'name': 'deleted', 'value': 1},
         ],
       };
 
-      // Make the delete_entry API call.
-      final deleteResult = await restRequest('delete_entry', deleteArgs);
+      final setEntryResult = await restRequest('set_entry', setEntryArgs);
 
-      // Determine the background color based on the current theme mode.
       Color snackBarBackgroundColor =
           Theme.of(context).brightness == Brightness.dark
               ? Colors.white // Nếu là Dark Mode, thiết lập màu nền là trắng
               : Colors.black; // Nếu là Light Mode, thiết lập màu nền là đen
 
-      // If the delete_entry API call was successful, the deleteResult['id'] property will contain the ID of the deleted lead.
-      if (deleteResult['id'] != null) {
+      // If the set_entry API call was successful, the setEntryResult['id'] property will contain the ID of the updated lead.
+      if (setEntryResult['id'] != null) {
+        Navigator.pushReplacement(
+          context,
+          NoAnimationPageRoute(builder: (context) => const ListScreen()),
+        );
         // Xóa thành công.
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -190,7 +192,7 @@ class DetailScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'Xóa lead thất bại: ${deleteResult['name']}',
+              'Xóa lead thất bại: ${setEntryResult['name']}',
               style: TextStyle(
                 color: Theme.of(context).snackBarTheme.contentTextStyle?.color,
                 backgroundColor: snackBarBackgroundColor,
